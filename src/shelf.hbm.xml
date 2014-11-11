@@ -28,7 +28,7 @@
       </id>
       <property name="title" column="TITLE" type="string"/>
       <property name="firstAuthor" column="FST_AUTHOR" type="string"/>
-      <property name="publishYear" column="PUBL_YEAR" type="short int"/>
+      <property name="publishYear" column="PUBL_YEAR" type="int"/>
    </class>
 
 </hibernate-mapping>
