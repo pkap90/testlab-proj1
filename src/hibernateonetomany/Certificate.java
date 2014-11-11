@@ -36,8 +36,6 @@ public class Certificate {
       return false;
    }
    public int hashCode() {
-      int tmp = 0;
-      tmp = ( id + name ).hashCode();
-      return tmp;
+      return (id + 13 * name.hashCode());
    }
 }
