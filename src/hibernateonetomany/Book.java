@@ -51,7 +51,7 @@ public class Book {
    }
    @Override
    public int hashCode() {
-      return (id + 13 * title.hashCode() + 31 * firstAuthor.hashCode()
-          + 97 * publishYear);
+      return id + 13 * title.hashCode() + 31 * firstAuthor.hashCode()
+          + 97 * publishYear;
    }
 }
