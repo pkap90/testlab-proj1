@@ -47,18 +47,19 @@ public class CertificateTest {
       {"asdf", 130, false},
       {"JLPT 4", 11, i == 4},
       {"JLPT 4", 17, false},
-      {"yada", 13, false}
+      {"yada", 13, false},
+      {"1JLPT 4", 1, false}
     };
   }
   
   @Parameters
   public static Collection data() {
     return Arrays.asList(new Object[][] {
-      {"FCE", 2, 1558966, cmpList(0)},
-      {"CAE", 3, 1585812, cmpList(1)},
-      {"CPE", 5, 1645859, cmpList(2)},
-      {"MBA", 7, 1714613, cmpList(3)},
-      {"JLPT 4", 11, "11JLPT 4".hashCode()/*1393797010426*/, cmpList(4)}
+      {"FCE", 2, 2 + 13 * "FCE".hashCode(), cmpList(0)},
+      {"CAE", 3, 3 + 13 * "CAE".hashCode(), cmpList(1)},
+      {"CPE", 5, 5 + 13 * "CPE".hashCode(), cmpList(2)},
+      {"MBA", 7, 7 + 13 * "MBA".hashCode(), cmpList(3)},
+      {"JLPT 4", 11, 11 + 13 * "JLPT 4".hashCode()/*1393797010426*/, cmpList(4)}
     });
   }
   
@@ -126,5 +127,12 @@ public class CertificateTest {
   public void testHashCode() {
     assertEquals(c1.hashCode(), h);
     assertEquals(c2.hashCode(), h);
+    // Taki sam dla takich samych, inny dla roznych
+    Certificate c3;
+    for (Object[] cmpRow : cmp) {
+      c3 = new Certificate((String)cmpRow[0]);
+      c3.setId((int)cmpRow[1]);
+      assertEquals(c1.equals(c3), c1.hashCode() == c3.hashCode());
+    }
   }
 }
