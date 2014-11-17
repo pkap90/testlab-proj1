@@ -21,7 +21,7 @@ import org.junit.runners.Parameterized;
 Read many objects from database based on Employee.firstName
 */
 @RunWith(Parameterized.class)
-public class DbReadManyTest1 {
+public class DbReadManyTest1 extends BaseDbTest{
 
     private final Employee employee1;
     private final Employee employee2;
@@ -47,30 +47,15 @@ public class DbReadManyTest1 {
 
     @Test
     public void test() {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        Transaction tx = null;
-
         List employeesDB = null;
         Integer setId1 = null;
         Integer setId2 = null;
 
-        try {
-            tx = session.beginTransaction();
+        setId1 = (Integer) session.save(employee1);
+        setId2 = (Integer) session.save(employee2);
 
-            session.createQuery("DELETE FROM Employee");
+        employeesDB = session.createQuery("FROM Employee E WHERE E.firstName='" + employee1.getFirstName() + "'").list();
 
-            setId1 = (Integer) session.save(employee1);
-            setId2 = (Integer) session.save(employee2);
-
-            employeesDB = session.createQuery("FROM Employee E WHERE E.firstName='" + employee1.getFirstName() + "'").list();
-
-            tx.rollback();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
 
         assertTrue(setId1 != null);          // check if employee is saved to DB (id is set)
         assertTrue(setId2 != null);          // check if employee is saved to DB (id is set)
