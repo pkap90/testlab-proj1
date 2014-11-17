@@ -6,8 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /*
-Read value from database that does not exists
-*/
+ Read value from database that does not exists
+ */
 public class DbReadOneNullTest {
 
     @Test
@@ -23,6 +23,8 @@ public class DbReadOneNullTest {
 
         try {
             tx = session.beginTransaction();
+
+            session.createQuery("DELETE FROM Employee");
 
             setId = (Integer) session.save(employee);
             employeeDB = (Employee) session.get(Employee.class, setId);

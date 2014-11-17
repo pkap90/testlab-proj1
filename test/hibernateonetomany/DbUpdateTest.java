@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -14,10 +15,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 /*
- Test Reading one Employee from database
+ Test Updating an Employee from database
  */
 @RunWith(Parameterized.class)
-public class DbReadOneTest {
+public class DbUpdateTest {
 
     private final Employee employee;
     private final Set certificates;
@@ -36,7 +37,7 @@ public class DbReadOneTest {
         });
     }
 
-    public DbReadOneTest(String fname, String lname, int salary, Set set) {
+    public DbUpdateTest(String fname, String lname, int salary, Set set) {
         employee = new Employee(fname, lname, salary);
         certificates = set;
         employee.setCertificates(certificates);
@@ -48,15 +49,22 @@ public class DbReadOneTest {
         Transaction tx = null;
 
         Employee employeeDB = null;
+        Employee employeeUpdatedDB = null;
         Integer id = null;
 
         try {
             tx = session.beginTransaction();
 
-            session.createQuery("DELETE FROM Employee");
-            
             id = (Integer) session.save(employee);
             employeeDB = (Employee) session.get(Employee.class, id);
+
+            employeeDB.setFirstName("Jan");
+            employeeDB.setLastName("Kowalski");
+            employeeDB.setSalary(999);
+            employeeDB.setCertificates(new HashSet(Arrays.asList(new Certificate("HelloWorld"))));
+            session.update(employeeDB);
+
+            employeeUpdatedDB = (Employee) session.get(Employee.class, id);
 
             tx.rollback();
         } catch (Exception e) {
@@ -68,16 +76,16 @@ public class DbReadOneTest {
 
         assertTrue(id != null);                             // if employee is in database then ID is set
         assertTrue(employeeDB != null);                     // check if employee really exists in database
+        assertTrue(employeeUpdatedDB != null);                     // check if employee really exists in database
 
         // READ values - check for Equality
         assertEquals(id.intValue(), employeeDB.getId());
+        assertEquals(employeeDB.getId(), employeeUpdatedDB.getId());
 
-        assertEquals(employee, employeeDB);
-        assertEquals(employee.getFirstName(), employeeDB.getFirstName());
-        assertEquals(employee.getLastName(), employeeDB.getLastName());
-        assertEquals(employee.getSalary(), employeeDB.getSalary());
-
-        assertTrue(!employee.getCertificates().isEmpty());   // check if we have any certificates
-        assertThat(employee.getCertificates().toArray(), is(equalTo(employeeDB.getCertificates().toArray())));
+        assertEquals(employeeUpdatedDB.getFirstName(), "Jan"); // the same object in database
+        assertEquals(employeeUpdatedDB.getLastName(), "Kowalski");
+        assertEquals(employeeUpdatedDB.getSalary(), 999);
+        assertEquals(employeeUpdatedDB.getFirstName(), "Jan");
+        assertThat(employeeDB.getCertificates().toArray(), is(equalTo(employeeUpdatedDB.getCertificates().toArray())));
     }
 }

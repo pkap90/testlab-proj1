@@ -26,6 +26,9 @@ public class DbCreateOneWrongTest {
     private final Employee employee;
     private final Set certificates;
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+    
     @Parameters
     public static Collection<Object[]> employees() {
         return Arrays.asList(new Object[][]{
@@ -49,18 +52,22 @@ public class DbCreateOneWrongTest {
         Employee employeeDB = null;
         Integer setId = null;
 
+        exception.expect(org.hibernate.exception.DataException.class);
+        
         try {
             tx = session.beginTransaction();
+
+            session.createQuery("DELETE FROM Employee");
 
             setId = (Integer) session.save(employee);
             employeeDB = (Employee) session.get(Employee.class, setId);
 
             tx.rollback();
         } catch (Exception e) {
-            e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
             }
+            throw e;
         }
 
         assertTrue(setId == null);          // if employee is NOT in database (then ID is NOT set)

@@ -24,6 +24,7 @@ public class DbCreateOneNullTest {
         try {
             tx = session.beginTransaction();
 
+            session.createQuery("DELETE FROM Employee");
             setId = (Integer) session.save(employee);
             employeeDB = (Employee) session.get(Employee.class, setId);
 

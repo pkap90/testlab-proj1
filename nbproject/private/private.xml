@@ -3,6 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HibernateOneToMany/test/hibernateonetomany/DbDeleteManyTest.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HibernateOneToMany/test/hibernateonetomany/DbDeleteOneTest.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HibernateOneToMany/test/hibernateonetomany/DbDeleteEmptyDBTest.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HibernateOneToMany/src/hibernateonetomany/ManageEmployee.java</file>
             <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HibernateOneToMany/test/hibernateonetomany/CRUDTestSuite.java</file>
         </group>
     </open-files>
