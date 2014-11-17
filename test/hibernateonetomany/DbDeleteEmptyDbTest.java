@@ -1,7 +1,5 @@
 package hibernateonetomany;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /*
- Test Reading Employee from empty database 
+ Test Deleting Employee from empty database 
  */
 public class DbDeleteEmptyDbTest {
 

@@ -1,23 +1,23 @@
 package hibernateonetomany;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+/*
+Adding many Employees do database
+*/
 @RunWith(Parameterized.class)
 public class DbCreateManyTest {
 
@@ -55,7 +55,8 @@ public class DbCreateManyTest {
         try {
             tx = session.beginTransaction();
 
-            session.createQuery("DELETE FROM Employee");
+            session.createQuery("DELETE FROM Employee"); // delete all records of Employee class in database  
+            
             setId1 = (Integer) session.save(employee1);
             setId2 = (Integer) session.save(employee2);
 

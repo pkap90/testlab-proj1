@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -15,7 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 /*
- Test Reading one Employee from database
+ Test Deleting one Employee from database
  */
 @RunWith(Parameterized.class)
 public class DbDeleteOneTest {
@@ -55,6 +53,8 @@ public class DbDeleteOneTest {
         try {
             tx = session.beginTransaction();
 
+            session.createQuery("DELETE FROM Employee"); // delete all records of Employee class in database  
+            
             id = (Integer) session.save(employee);
             employeeDB = (Employee) session.get(Employee.class, id);
             session.delete(employeeDB);

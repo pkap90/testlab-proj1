@@ -52,7 +52,8 @@ public class DbCreateOneTest {
         try {
             tx = session.beginTransaction();
 
-            session.createQuery("DELETE FROM Employee");
+            session.createQuery("DELETE FROM Employee"); // delete all records of Employee class in database  
+            
             id = (Integer) session.save(employee);
             employeeDB = (Employee) session.get(Employee.class, id);
 
