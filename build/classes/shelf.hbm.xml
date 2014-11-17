@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="hibernateonetomany.Shelf" table="SHELF">
+      <meta attribute="class-description">
+         This class contains the shelf data. 
+      </meta>
+      <id name="id" type="int" column="ID">
+         <generator class="native"/>
+      </id>
+      <set name="books" cascade="all">
+         <key column="shelf_id"/>
+         <one-to-many class="hibernateonetomany.Book"/>
+      </set>
+      <property name="name" column="SHELF_NAME" type="string"/>
+      <property name="location" column="LOCATION" type="string"/>
+   </class>
+
+   <class name="hibernateonetomany.Book" table="BOOK">
+      <meta attribute="class-description">
+         This class contains the book records. 
+      </meta>
+      <id name="id" type="int" column="ID">
+         <generator class="native"/>
+      </id>
+      <property name="title" column="TITLE" type="string"/>
+      <property name="firstAuthor" column="FST_AUTHOR" type="string"/>
+      <property name="publishYear" column="PUBL_YEAR" type="int"/>
+   </class>
+
+</hibernate-mapping>
