@@ -24,11 +24,11 @@ import org.junit.runners.Parameterized.*;
 @RunWith(Parameterized.class)
 public class CertificateTest {
 
-  private final Certificate c1;
-  private final Certificate c2;
-  private final String n;
+  private final Certificate certificate1;
+  private final Certificate certificate2;
+  private final String name;
   private final int id;
-  private final int h;
+  private final int hash;
   private final Object[][] cmp;
   
   public static Object[][] cmpList(int i) {
@@ -65,14 +65,14 @@ public class CertificateTest {
   
   public CertificateTest(String name, int id, int hash, Object[][] cmpList) {
     cmp = cmpList;
-    n = name;
+    this.name = name;
     this.id = id;
-    this.h = hash;
-    c1 = new Certificate(name);
-    c2 = new Certificate();
-    c1.setId(id);
-    c2.setId(id);
-    c2.setName(name);
+    this.hash = hash;
+    certificate1 = new Certificate(name);
+    certificate2 = new Certificate();
+    certificate1.setId(id);
+    certificate2.setId(id);
+    certificate2.setName(name);
   }
 
   /*@BeforeClass
@@ -99,40 +99,40 @@ public class CertificateTest {
 
   @Test
   public void testConstructor() {
-    assertEquals(n, c1.getName());
-    assertEquals(id, c1.getId());
+    assertEquals(name, certificate1.getName());
+    assertEquals(id, certificate1.getId());
   }
   
   @Test
   public void testAccessors() {
-    assertEquals(n, c2.getName());
-    assertEquals(id, c2.getId());
+    assertEquals(name, certificate2.getName());
+    assertEquals(id, certificate2.getId());
   }
   
   @Test
   public void testEquals() {
-    Certificate c3;
+    Certificate certificate3;
     for (Object[] cmpRow : cmp) {
-      c3 = new Certificate((String)cmpRow[0]);
-      c3.setId((int)cmpRow[1]);
-      assertTrue(c1.equals(c1));
-      assertTrue(c2.equals(c2));
-      assertTrue(c1.equals(c2));
-      assertEquals(c1.equals(c3), (boolean)cmpRow[2]);
-      assertEquals(c2.equals(c3), (boolean)cmpRow[2]);
+      certificate3 = new Certificate((String)cmpRow[0]);
+      certificate3.setId((int)cmpRow[1]);
+      assertTrue(certificate1.equals(certificate1));
+      assertTrue(certificate2.equals(certificate2));
+      assertTrue(certificate1.equals(certificate2));
+      assertEquals(certificate1.equals(certificate3), (boolean)cmpRow[2]);
+      assertEquals(certificate2.equals(certificate3), (boolean)cmpRow[2]);
     }
   }
   
   @Test
   public void testHashCode() {
-    assertEquals(c1.hashCode(), h);
-    assertEquals(c2.hashCode(), h);
+    assertEquals(certificate1.hashCode(), hash);
+    assertEquals(certificate2.hashCode(), hash);
     // Taki sam dla takich samych, inny dla roznych
-    Certificate c3;
+    Certificate certificate3;
     for (Object[] cmpRow : cmp) {
-      c3 = new Certificate((String)cmpRow[0]);
-      c3.setId((int)cmpRow[1]);
-      assertEquals(c1.equals(c3), c1.hashCode() == c3.hashCode());
+      certificate3 = new Certificate((String)cmpRow[0]);
+      certificate3.setId((int)cmpRow[1]);
+      assertEquals(certificate1.equals(certificate3), certificate1.hashCode() == certificate3.hashCode());
     }
   }
 }
