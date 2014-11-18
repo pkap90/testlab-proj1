@@ -10,11 +10,11 @@ import org.junit.runners.Parameterized.*;
 @RunWith(Parameterized.class)
 public class EmployeeTest {
 
-  private final Employee em1;
-  private final Employee em2;
-  private final String fn;
-  private final String ln;
-  private final int s;
+  private final Employee employee1;
+  private final Employee employee2;
+  private final String firstName;
+  private final String lastName;
+  private final int salary;
   private final int id;
   @Parameters
   public static Collection data() {
@@ -29,28 +29,28 @@ public class EmployeeTest {
     });
   }
   public EmployeeTest(String fname, String lname, int sal, int id) {
-    fn = fname;
-    ln = lname;
-    s = sal;
+    firstName = fname;
+    lastName = lname;
+    salary = sal;
     this.id = id;
-    em1 = new Employee(fname, lname, sal);
-    em1.setId(id);
-    em2 = new Employee();
-    em2.setFirstName(fname);
-    em2.setLastName(lname);
-    em2.setSalary(sal);
-    em2.setId(id);
+    employee1 = new Employee(fname, lname, sal);
+    employee1.setId(id);
+    employee2 = new Employee();
+    employee2.setFirstName(fname);
+    employee2.setLastName(lname);
+    employee2.setSalary(sal);
+    employee2.setId(id);
   }
 
   @Test
   public void testConstructor() {
-    assertEquals(fn, em1.getFirstName());
-    assertEquals(ln, em1.getLastName());
-    assertEquals(s, em1.getSalary());
-    assertEquals(id, em1.getId());
-    assertEquals(fn, em2.getFirstName());
-    assertEquals(ln, em2.getLastName());
-    assertEquals(s, em2.getSalary());
-    assertEquals(id, em2.getId());
+    assertEquals(firstName, employee1.getFirstName());
+    assertEquals(lastName, employee1.getLastName());
+    assertEquals(salary, employee1.getSalary());
+    assertEquals(id, employee1.getId());
+    assertEquals(firstName, employee2.getFirstName());
+    assertEquals(lastName, employee2.getLastName());
+    assertEquals(salary, employee2.getSalary());
+    assertEquals(id, employee2.getId());
   }
 }
