@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -17,7 +15,7 @@ import org.junit.runners.Parameterized;
  Test Updating an Employee from database
  */
 @RunWith(Parameterized.class)
-public class DbUpdateTest {
+public class DbUpdateTest extends BaseDbTest{
 
     private final Employee employee;
     private final Set certificates;
@@ -44,36 +42,20 @@ public class DbUpdateTest {
 
     @Test
     public void test() {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        Transaction tx = null;
-
         Employee employeeDB = null;
         Employee employeeUpdatedDB = null;
         Integer id = null;
+ 
+        id = (Integer) session.save(employee);
+        employeeDB = (Employee) session.get(Employee.class, id);
 
-        try {
-            tx = session.beginTransaction();
+        employeeDB.setFirstName("Jan");
+        employeeDB.setLastName("Kowalski");
+        employeeDB.setSalary(999);
+        employeeDB.setCertificates(new HashSet(Arrays.asList(new Certificate("HelloWorld"))));
+        session.update(employeeDB);
 
-            session.createQuery("DELETE FROM Employee"); // delete all records of Employee class in database
-            
-            id = (Integer) session.save(employee);
-            employeeDB = (Employee) session.get(Employee.class, id);
-
-            employeeDB.setFirstName("Jan");
-            employeeDB.setLastName("Kowalski");
-            employeeDB.setSalary(999);
-            employeeDB.setCertificates(new HashSet(Arrays.asList(new Certificate("HelloWorld"))));
-            session.update(employeeDB);
-
-            employeeUpdatedDB = (Employee) session.get(Employee.class, id);
-
-            tx.rollback();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
+        employeeUpdatedDB = (Employee) session.get(Employee.class, id);
 
         assertTrue(id != null);                             // if employee is in database then ID is set
         assertTrue(employeeDB != null);                     // check if employee really exists in database

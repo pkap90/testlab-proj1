@@ -1,6 +1,5 @@
 package hibernateonetomany;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,8 +8,6 @@ import java.util.Set;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +19,7 @@ import org.junit.runners.Parameterized;
 Read many objects from database based on Employee.lastName
 */
 @RunWith(Parameterized.class)
-public class DbReadManyTest2 {
+public class DbReadManyTest2 extends BaseDbTest{
 
     private final Employee employee1;
     private final Employee employee2;
@@ -48,30 +45,14 @@ public class DbReadManyTest2 {
 
     @Test
     public void test() {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        Transaction tx = null;
-
         List employeesDB = null;
         Integer setId1 = null;
         Integer setId2 = null;
 
-        try {
-            tx = session.beginTransaction();
+        setId1 = (Integer) session.save(employee1);
+        setId2 = (Integer) session.save(employee2);
 
-            session.createQuery("DELETE FROM Employee");
-
-            setId1 = (Integer) session.save(employee1);
-            setId2 = (Integer) session.save(employee2);
-
-            employeesDB = session.createQuery("FROM Employee E WHERE E.lastName='" + employee1.getLastName() + "'").list();
-
-            tx.rollback();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
+        employeesDB = session.createQuery("FROM Employee E WHERE E.lastName='" + employee1.getLastName() + "'").list();
 
         assertTrue(setId1 != null);          // check if employee is saved to DB (id is set)
         assertTrue(setId2 != null);          // check if employee is saved to DB (id is set)

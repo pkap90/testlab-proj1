@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -17,7 +15,7 @@ import org.junit.runners.Parameterized;
  Test Reading one Employee from database
  */
 @RunWith(Parameterized.class)
-public class DbReadOneTest {
+public class DbReadOneTest extends BaseDbTest{
 
     private final Employee employee;
     private final Set certificates;
@@ -44,27 +42,11 @@ public class DbReadOneTest {
 
     @Test
     public void test() {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        Transaction tx = null;
-
         Employee employeeDB = null;
         Integer id = null;
 
-        try {
-            tx = session.beginTransaction();
-
-            session.createQuery("DELETE FROM Employee");
-            
-            id = (Integer) session.save(employee);
-            employeeDB = (Employee) session.get(Employee.class, id);
-
-            tx.rollback();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
+        id = (Integer) session.save(employee);
+        employeeDB = (Employee) session.get(Employee.class, id);
 
         assertTrue(id != null);                             // if employee is in database then ID is set
         assertTrue(employeeDB != null);                     // check if employee really exists in database

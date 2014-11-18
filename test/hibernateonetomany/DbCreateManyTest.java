@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -19,7 +17,7 @@ import org.junit.runners.Parameterized;
 Adding many Employees do database
 */
 @RunWith(Parameterized.class)
-public class DbCreateManyTest {
+public class DbCreateManyTest extends BaseDbTest {
 
     private final Employee employee1;
     private final Employee employee2;
@@ -45,30 +43,15 @@ public class DbCreateManyTest {
 
     @Test
     public void test() {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        Transaction tx = null;
 
         List employeesDB = null;
         Integer setId1 = null;
         Integer setId2 = null;
 
-        try {
-            tx = session.beginTransaction();
+        setId1 = (Integer) session.save(employee1);
+        setId2 = (Integer) session.save(employee2);
 
-            session.createQuery("DELETE FROM Employee"); // delete all records of Employee class in database  
-            
-            setId1 = (Integer) session.save(employee1);
-            setId2 = (Integer) session.save(employee2);
-
-            employeesDB = session.createQuery("FROM Employee E WHERE E.lastName='" + employee1.getLastName() + "'").list();
-
-            tx.rollback();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
+        employeesDB = session.createQuery("FROM Employee E WHERE E.lastName='" + employee1.getLastName() + "'").list();
 
         assertTrue(setId1 != null);          // check if employee is saved to DB (id is set)
         assertTrue(setId2 != null);          // check if employee is saved to DB (id is set)

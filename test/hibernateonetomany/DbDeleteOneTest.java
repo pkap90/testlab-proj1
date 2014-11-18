@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -16,7 +14,7 @@ import org.junit.runners.Parameterized;
  Test Deleting one Employee from database
  */
 @RunWith(Parameterized.class)
-public class DbDeleteOneTest {
+public class DbDeleteOneTest extends BaseDbTest{
 
     private final Employee employee;
     private final Set certificates;
@@ -43,31 +41,15 @@ public class DbDeleteOneTest {
 
     @Test
     public void test() {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        Transaction tx = null;
-
         List employees = null;
         Employee employeeDB = null;
         Integer id = null;
 
-        try {
-            tx = session.beginTransaction();
+        id = (Integer) session.save(employee);
+        employeeDB = (Employee) session.get(Employee.class, id);
+        session.delete(employeeDB);
 
-            session.createQuery("DELETE FROM Employee"); // delete all records of Employee class in database  
-            
-            id = (Integer) session.save(employee);
-            employeeDB = (Employee) session.get(Employee.class, id);
-            session.delete(employeeDB);
-
-            employees = session.createQuery("FROM Employee").list();
-            
-            tx.rollback();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
+        employees = session.createQuery("FROM Employee").list();
 
         assertFalse(employees.size() > 0);
         assertEquals(employees.size(),0);       

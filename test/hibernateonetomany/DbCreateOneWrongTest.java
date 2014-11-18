@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
@@ -21,7 +19,7 @@ import org.junit.runners.Parameterized.Parameters;
  Add Employees to database that exceed limits of the database and therefore cannot be added
  */
 @RunWith(Parameterized.class)
-public class DbCreateOneWrongTest {
+public class DbCreateOneWrongTest extends BaseDbTest{
 
     private final Employee employee;
     private final Set certificates;
@@ -46,29 +44,13 @@ public class DbCreateOneWrongTest {
 
     @Test
     public void test() {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        Transaction tx = null;
-
         Employee employeeDB = null;
         Integer setId = null;
 
         exception.expect(org.hibernate.exception.DataException.class);
         
-        try {
-            tx = session.beginTransaction();
-
-            session.createQuery("DELETE FROM Employee"); // delete all records of Employee class in database  
-            
-            setId = (Integer) session.save(employee);
-            employeeDB = (Employee) session.get(Employee.class, setId);
-
-            tx.rollback();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            throw e;
-        }
+        setId = (Integer) session.save(employee);
+        employeeDB = (Employee) session.get(Employee.class, setId);
 
         assertTrue(setId == null);          // if employee is NOT in database (then ID is NOT set)
         assertTrue(employeeDB == null);     // check if employee wasn't written to database
