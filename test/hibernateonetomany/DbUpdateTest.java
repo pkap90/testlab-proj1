@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;

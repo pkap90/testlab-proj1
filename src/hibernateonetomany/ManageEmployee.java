@@ -53,6 +53,7 @@ public class ManageEmployee {
         /* List down all the employees */
         ME.listEmployees();
 
+        ME.deleteEmployee(empID1);
     }
 
     /* Method to add an employee record in the database */

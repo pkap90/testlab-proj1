@@ -1,8 +1,6 @@
 package hibernateonetomany;
 
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

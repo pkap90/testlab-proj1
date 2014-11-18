@@ -1,8 +1,8 @@
-Mon Nov 17 22:00:55 CET 2014 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
+Tue Nov 18 12:01:53 CET 2014 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Nov 17 22:01:06 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0149-bf8e-cb74-000055a4e6f2 
-on database directory C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db\sample  with class loader sun.misc.Launcher$AppClassLoader@6e66da2c 
+Tue Nov 18 12:01:53 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0149-c290-b609-000055a4e6f2 
+on database directory C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db\sample  with class loader sun.misc.Launcher$AppClassLoader@436dc3e6 
 Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_09/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_09-b05
@@ -10,4 +10,4 @@ user.dir=C:\Program Files\Java\jdk1.7.0_09\db
 derby.system.home=C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Mon Nov 17 22:11:47 CET 2014: Shutting down Derby engine
+Tue Nov 18 12:15:03 CET 2014: Shutting down Derby engine
