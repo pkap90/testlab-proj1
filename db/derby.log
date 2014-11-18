@@ -1,40 +1,8 @@
-<<<<<<< HEAD
-Tue Nov 18 00:32:14 CET 2014 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
+Tue Nov 18 12:19:04 CET 2014 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Tue Nov 18 00:32:58 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0149-c019-52ff-000055a4e6f2 
-on database directory C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db\customDB  with class loader sun.misc.Launcher$AppClassLoader@6e66da2c 
-Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_09/db/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_09-b05
-user.dir=C:\Program Files\Java\jdk1.7.0_09\db
-derby.system.home=C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Nov 18 00:33:03 CET 2014:
-Shutting down instance a816c00e-0149-c019-52ff-000055a4e6f2 on database directory C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db\customDB with class loader sun.misc.Launcher$AppClassLoader@6e66da2c 
-Tue Nov 18 00:33:03 CET 2014 Thread[DRDAConnThread_3,5,main] (DATABASE = customDB), (DRDAID = {2}), Database 'customDB' shutdown.
-----------------------------------------------------------------
-Tue Nov 18 00:35:35 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance 23ce809c-0149-c019-52ff-000055a4e6f2 
-on database directory C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db\customDB  with class loader sun.misc.Launcher$AppClassLoader@6e66da2c 
-Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_09/db/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_09-b05
-user.dir=C:\Program Files\Java\jdk1.7.0_09\db
-derby.system.home=C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Nov 18 00:50:47 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance 24fa0130-0149-c019-52ff-000055a4e6f2 
+Tue Nov 18 12:19:25 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0149-c2a0-7178-000055a4e6f2 
 on database directory C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db\sample  with class loader sun.misc.Launcher$AppClassLoader@6e66da2c 
-=======
-Tue Nov 18 12:01:53 CET 2014 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
-----------------------------------------------------------------
-Tue Nov 18 12:01:53 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0149-c290-b609-000055a4e6f2 
-on database directory C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db\sample  with class loader sun.misc.Launcher$AppClassLoader@436dc3e6 
->>>>>>> norbert_refactor
 Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_09/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_09-b05
@@ -42,8 +10,4 @@ user.dir=C:\Program Files\Java\jdk1.7.0_09\db
 derby.system.home=C:\Users\Mateusz\Documents\NetBeansProjects\HibernateOneToMany\db
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-<<<<<<< HEAD
-Tue Nov 18 00:59:02 CET 2014: Shutting down Derby engine
-=======
-Tue Nov 18 12:15:03 CET 2014: Shutting down Derby engine
->>>>>>> norbert_refactor
+Tue Nov 18 12:21:14 CET 2014: Shutting down Derby engine
